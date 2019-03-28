@@ -12,7 +12,7 @@ int main()
 {
     string firstName = "???";       // string variable
     string lastName = "!!!";
-    int age = -1;                   // integer variable
+    double age = -1.0;              // double variable
 
     cout << "Please enter your first name, last name, and age\n";
 
@@ -20,7 +20,7 @@ int main()
     cin >> lastName;
     cin >> age;             // read an integer
 
-    cout << "Hello, " << firstName  << " " << lastName << " (age " << age << ")\n";
+    cout << "Hello, " << firstName  << " " << lastName << " (age " << age * 12 << " months)\n";
 
     return 0;
 }
