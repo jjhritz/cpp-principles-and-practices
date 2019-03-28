@@ -3,4 +3,4 @@ project(Principles_and_Practices)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(Principles_and_Practices "Chapter 2/2.2 Classic First Program/classicfirstprogram.cpp" "std_lib_facilities.h")
+add_executable(ClassicFirstProgram "Chapter 2/2.2 Classic First Program/classicfirstprogram.cpp")
