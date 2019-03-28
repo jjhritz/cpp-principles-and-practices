@@ -10,12 +10,12 @@
 
 int main()
 {
-    string firstName;      // string variable
-    int age;                // integer variable
+    string firstName = "???";       // string variable
+    int age = -1;                   // integer variable
 
     cout << "Please enter your first name and age\n";
 
-    cin >> firstName;      // read a string
+    cin >> firstName;       // read a string
     cin >> age;             // read an integer
 
     cout << "Hello, " << firstName << " (age " << age << ")\n";
