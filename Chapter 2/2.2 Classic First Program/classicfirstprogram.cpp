@@ -4,7 +4,7 @@
 
 int main()
 {
-    std::cout << "Hello, World!\n";     // output "Hello, World!"
-    keep_window_open();                 // wait for a character to be entered
+    std::cout << "Hello, programming!\nHere we go!\n";     // output "Hello, programming!\nHere we go!"
+    keep_window_open();                                    // wait for a character to be entered
     return 0;
 }
