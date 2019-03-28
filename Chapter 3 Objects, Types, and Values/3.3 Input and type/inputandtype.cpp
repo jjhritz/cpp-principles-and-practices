@@ -11,14 +11,16 @@
 int main()
 {
     string firstName = "???";       // string variable
+    string lastName = "!!!";
     int age = -1;                   // integer variable
 
-    cout << "Please enter your first name and age\n";
+    cout << "Please enter your first name, last name, and age\n";
 
     cin >> firstName;       // read a string
+    cin >> lastName;
     cin >> age;             // read an integer
 
-    cout << "Hello, " << firstName << " (age " << age << ")\n";
+    cout << "Hello, " << firstName  << " " << lastName << " (age " << age << ")\n";
 
     return 0;
 }
