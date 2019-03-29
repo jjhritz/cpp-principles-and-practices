@@ -22,37 +22,14 @@
 
 #include "calcparser.h"
 
-
-Token get_token()    // read a token from cin
-{
-    char ch;
-    cin >> ch;    // note that >> skips whitespace (space, newline, tab, etc.)
-
-    switch (ch) {
-        //not yet   case ';':    // for "print"
-        //not yet   case 'q':    // for "quit"
-        case '(': case ')': case '+': case '-': case '*': case '/':
-            return Token(ch);        // let each character represent itself
-        case '.':
-        case '0': case '1': case '2': case '3': case '4':
-        case '5': case '6': case '7': case '8': case '9':
-        {
-            cin.putback(ch);         // put digit back into the input stream
-            double val;
-            cin >> val;              // read a floating-point number
-            return Token('n',val);   // let 'n' represent "a number"
-        }
-        default:
-            error("Bad token");
-    }
-}
+Token_stream ts;        // provides get() and putback()
 
 
 // deal with + and –.  Calls term() and get_token()
 double expression()
 {
     double left = term();               // Evaluate another term.  Calling Expression again results in infinite recursion.
-    Token t = get_token();              // Get the next token
+    Token t = ts.get();                 // Get the next token from the token stream
 
     while(true)
     {
@@ -60,13 +37,14 @@ double expression()
         {
             case '+':                       // Addition operator
                 left += term();             // Evaluate the next term and sum it with the left expression
-                t = get_token();
+                t = ts.get();
                 break;
             case '-':                       // Subtraction operator
                 left -= term();             // Evaluate the next term and subtract it from the lest expression
-                t = get_token();
+                t = ts.get();
                 break;
             default:                        // The next token isn't an addition or subtraction operator.
+                ts.putback(t);              // Put the token back in the token stream for someone else to evaluate.
                 return left;                // Return the answer.
         }
     }
@@ -77,7 +55,7 @@ double expression()
 double term()
 {
     double left = primary();
-    Token t = get_token();
+    Token t = ts.get();
 
     while(true)
     {
@@ -85,17 +63,18 @@ double term()
         {
             case '*':
                 left *= primary();
-                t = get_token();
+                t = ts.get();
                 break;
             case '/':
             {
                 double d = primary();
                 if (d == 0) error("Divide by zero");
                 left /= d;
-                t = get_token();
+                t = ts.get();
                 break;
             }
             default:
+                ts.putback(t);
                 return left;
         }
     }
@@ -105,13 +84,13 @@ double term()
 // deal with numbers and parentheses.  Calls expression() and get_token()
 double primary()
 {
-    Token t = get_token();
+    Token t = ts.get();
     switch (t.kind)
     {
         case '(':
         {
             double d = expression();
-            t = get_token();
+            t = ts.get();
 
             if(t.kind != ')') error("')' expected.  Close your parentheses!");
 
