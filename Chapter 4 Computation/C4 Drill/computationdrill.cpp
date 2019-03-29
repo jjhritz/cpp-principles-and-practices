@@ -17,7 +17,7 @@ int main()
     {
         cin >> valB;
 
-        cout << valA << " " << valB;
+        cout << "The smaller number is: " << min(valA, valB) << ".  The larger number is: " << max(valA, valB);
     }
 
     return 0;
