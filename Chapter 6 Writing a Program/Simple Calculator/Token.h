@@ -13,6 +13,8 @@ class Token
     public:
         char kind;
         double value;
+        Token(char ch);
+        Token(char ch, double val);
 };
 
 
