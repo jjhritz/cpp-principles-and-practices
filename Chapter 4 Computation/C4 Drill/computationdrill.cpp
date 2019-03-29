@@ -1,5 +1,6 @@
 //
 // Reads two doubles then prints them, telling the user which is bigger and which smaller, or if both are equal.
+// If the numbers differ by less than 0.01, the user is told they are "almost equal".
 // Terminates when a non-int is received.
 //
 // Yes, I'm aware "using namespace std" is bad practice; it's just how the header works
@@ -25,6 +26,13 @@ int main()
         else
         {
             cout << "The smaller number is: " << min(valA, valB) << ".  The larger number is: " << max(valA, valB);
+
+            double diff = abs(valA - valB);
+
+            if(diff < 1.0/100)
+            {
+                cout << "These numbers are almost equal!";
+            }
         }
 
     }
