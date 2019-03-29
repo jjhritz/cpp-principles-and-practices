@@ -30,7 +30,7 @@
 // deal with + and –.  Calls term() and get_token()
 double expression()
 {
-    double left = expression();         // Evaluate another expression
+    double left = term();               // Evaluate another term.  Calling Expression again results in infinite recursion.
     Token t = get_token();              // Get the next token
 
     switch (t.kind)                     // Determine token type
