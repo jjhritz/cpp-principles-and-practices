@@ -14,20 +14,42 @@ int main()
 {
     double val;             // Holds the received double
     double minVal = 0, maxVal = 0;
+    constexpr double cmPerM = 100, cmPerIn = 2.54, inPerF = 12;
+    string unit;              // Tracks the unit of the input for evaluation.
 
-    while(cin >> val)
+    while(cin >> val >> unit)
     {
-        cout << val;
+        double valAsCm = 0;         // Stores the input value converted to centimeters
 
-        if (val < minVal)
+        cout << val << unit;
+
+        // Convert everything to centimeters
+        if (unit == "cm" || unit == " cm")
         {
-            minVal = val;
-            cout << "This is the smallest number received so far.";
+            valAsCm = val;
         }
-        else if (val > maxVal)
+        else if(unit == "m" || unit == " m")
         {
-            maxVal = val;
-            cout << "This is the largest number received so far.";
+             valAsCm = val * cmPerM;
+        }
+        else if(unit == "in" || unit == " in")
+        {
+            valAsCm = val * cmPerIn;
+        }
+        else if(unit == "ft" || unit == " ft")
+        {
+            valAsCm = val * inPerF * cmPerIn;
+        }
+
+        if (valAsCm < minVal)
+        {
+            minVal = valAsCm;
+            cout << "This is the smallest number (" << valAsCm << "cm) received so far.";
+        }
+        else if (valAsCm > maxVal)
+        {
+            maxVal = valAsCm;
+            cout << "This is the largest number (" << valAsCm << "cm) received so far.";
         }
     }
 
