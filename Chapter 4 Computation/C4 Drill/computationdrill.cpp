@@ -1,6 +1,6 @@
 //
 // Continually doubles then prints them, telling the user when the number entered is the largest or smallest it has seen.
-// Rejects non-supported units.
+// Rejects non-supported units and keeps a running sum of accepted values.
 // Terminates when a non-double is received.
 //
 // Yes, I'm aware "using namespace std" is bad practice; it's just how the header works
@@ -14,7 +14,7 @@
 int main()
 {
     double val;             // Holds the received double
-    double minVal = 0, maxVal = 0;
+    double minVal = 0, maxVal = 0, runningSum = 0;
     constexpr double cmPerM = 100, cmPerIn = 2.54, inPerF = 12;
 
     string unit;                // Tracks the unit of the input for evaluation.
@@ -50,6 +50,10 @@ int main()
 
         if(accepted)
         {
+            runningSum += valAsCm;
+
+            cout << "The running sum is: " << runningSum;
+
             if (valAsCm < minVal)
             {
                 minVal = valAsCm;
