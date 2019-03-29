@@ -22,29 +22,29 @@
 
 #include "calcparser.h"
 
-Token_stream ts;        // provides get() and putback()
+
 
 
 // deal with + and –.  Calls term() and get_token()
-double expression()
+double expression(Token_stream *ts)
 {
-    double left = term();               // Evaluate another term.  Calling Expression again results in infinite recursion.
-    Token t = ts.get();                 // Get the next token from the token stream
+    double left = term(ts);                 // Evaluate another term.  Calling Expression again results in infinite recursion.
+    Token t = ts->get();                     // Get the next token from the token stream
 
     while(true)
     {
         switch (t.kind)                     // Determine token type
         {
             case '+':                       // Addition operator
-                left += term();             // Evaluate the next term and sum it with the left expression
-                t = ts.get();
+                left += term(ts);           // Evaluate the next term and sum it with the left expression
+                t = ts->get();
                 break;
             case '-':                       // Subtraction operator
-                left -= term();             // Evaluate the next term and subtract it from the lest expression
-                t = ts.get();
+                left -= term(ts);           // Evaluate the next term and subtract it from the lest expression
+                t = ts->get();
                 break;
             default:                        // The next token isn't an addition or subtraction operator.
-                ts.putback(t);              // Put the token back in the token stream for someone else to evaluate.
+                ts->putback(t);              // Put the token back in the token stream for someone else to evaluate.
                 return left;                // Return the answer.
         }
     }
@@ -52,29 +52,29 @@ double expression()
 
 
 // deal with *, /, and %.  Calls primary() and get_token()
-double term()
+double term(Token_stream *ts)
 {
-    double left = primary();
-    Token t = ts.get();
+    double left = primary(ts);
+    Token t = ts->get();
 
     while(true)
     {
         switch (t.kind)
         {
             case '*':
-                left *= primary();
-                t = ts.get();
+                left *= primary(ts);
+                t = ts->get();
                 break;
             case '/':
             {
-                double d = primary();
+                double d = primary(ts);
                 if (d == 0) error("Divide by zero");
                 left /= d;
-                t = ts.get();
+                t = ts->get();
                 break;
             }
             default:
-                ts.putback(t);
+                ts->putback(t);
                 return left;
         }
     }
@@ -82,15 +82,15 @@ double term()
 
 
 // deal with numbers and parentheses.  Calls expression() and get_token()
-double primary()
+double primary(Token_stream *ts)
 {
-    Token t = ts.get();
+    Token t = ts->get();
     switch (t.kind)
     {
         case '(':
         {
-            double d = expression();
-            t = ts.get();
+            double d = expression(ts);
+            t = ts->get();
 
             if(t.kind != ')') error("')' expected.  Close your parentheses!");
 

@@ -50,7 +50,7 @@ Token Token_stream::get()
             cin.putback(ch);         // put digit back into the input stream
             double val;
             cin >> val;              // read a floating-point number
-            return Token('8',val);   // let '8' represent "a number"
+            return Token('n',val);   // let '8' represent "a number"
         }
         default:
             error("Bad token");

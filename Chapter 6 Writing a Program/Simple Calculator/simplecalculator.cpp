@@ -12,10 +12,28 @@
 
 int main()
 {
+    double val = 0;
+    Token_stream ts;        // provides get() and putback()
+
     try
     {
         while (cin)
-            cout << "=" << expression() << '\n';
+        {
+            Token t = ts.get();
+
+            if(t.kind == 'q') break;        // 'q' for quit.  Always useful.
+
+            if(t.kind == ';')               // ';' for print now.  Allows evaluation to be printed immediately after expression is entered.
+            {
+                cout << "=" << val << '\n';
+            }
+            else
+            {
+                ts.putback(t);
+            }
+
+            val = expression(&ts);
+        }
         keep_window_open();
     }
     catch (exception& e)
