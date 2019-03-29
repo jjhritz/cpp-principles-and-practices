@@ -18,6 +18,7 @@ int main()
     constexpr double cmPerM = 100, cmPerIn = 2.54, inPerF = 12;
 
     string unit;                // Tracks the unit of the input for evaluation.
+    vector<double> inputs;      // Stores all inputs in cm
 
     while(cin >> val >> unit)
     {
@@ -50,6 +51,8 @@ int main()
 
         if(accepted)
         {
+            inputs.push_back(valAsCm);
+
             runningSum += valAsCm;
 
             cout << "The running sum is: " << runningSum;
@@ -70,6 +73,11 @@ int main()
             cout << "Sorry, unit " << unit << " is not supported.";
         }
 
+    }
+
+    for(double x : inputs)
+    {
+        cout << x << ", ";
     }
 
     return 0;
