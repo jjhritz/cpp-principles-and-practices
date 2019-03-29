@@ -1,6 +1,7 @@
 //
 // Continually doubles then prints them, telling the user when the number entered is the largest or smallest it has seen.
 // Rejects non-supported units and keeps a running sum of accepted values.
+// Stores all accepted values in a vector, then sorts and prints them upon termination.
 // Terminates when a non-double is received.
 //
 // Yes, I'm aware "using namespace std" is bad practice; it's just how the header works
@@ -74,6 +75,8 @@ int main()
         }
 
     }
+
+    sort(inputs);
 
     for(double x : inputs)
     {
