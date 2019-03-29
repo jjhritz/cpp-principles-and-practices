@@ -5,6 +5,8 @@
 #ifndef PRINCIPLES_AND_PRACTICES_TOKEN_H
 #define PRINCIPLES_AND_PRACTICES_TOKEN_H
 
+#include "../../Programming-_Principles_and_Practice_Using_Cpp/std_lib_facilities.h"
+
 class Token
 {
     // Representation of tokens taken from the command line

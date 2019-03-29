@@ -17,7 +17,6 @@
           Primary
           Term "*" Primary             // multiplication
           Term "/" Primary             // division
-          Term "%" Primary             // remainder (modulo)
     Primary:
           Number
            "(" Expression ")"          // grouping
@@ -68,15 +67,15 @@ double term()
                 t = get_token();
                 break;
             case '/':
-                left /= primary();
+            {
+                double d = primary();
+                if (d == 0) error("Divide by zero");
+                left /= d;
                 t = get_token();
                 break;
-            case '%':
-                left %= primary();
-                t = get_token();
-                break;
+            }
             default:
-            return left;
+                return left;
         }
     }
 }
