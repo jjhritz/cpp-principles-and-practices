@@ -17,7 +17,15 @@ int main()
     {
         cin >> valB;
 
-        cout << "The smaller number is: " << min(valA, valB) << ".  The larger number is: " << max(valA, valB);
+        if (valA == valB)
+        {
+            cout << "You entered " << valA << " both times.";
+        }
+        else
+        {
+            cout << "The smaller number is: " << min(valA, valB) << ".  The larger number is: " << max(valA, valB);
+        }
+
     }
 
     return 0;
