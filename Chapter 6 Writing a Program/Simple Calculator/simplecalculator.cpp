@@ -27,6 +27,7 @@
 
 #include "simplecalculator.h"
 
+
 // deal with + and –.  Calls term() and get_token()
 double expression()
 {
@@ -49,5 +50,33 @@ double expression()
                 return left;                // Return the answer.
         }
     }
+}
 
+
+// deal with *, /, and %.  Calls primary() and get_token()
+double term()
+{
+    double left = primary();
+    Token t = get_token();
+
+    while(true)
+    {
+        switch (t.kind)
+        {
+            case '*':
+                left *= primary();
+                t = get_token();
+                break;
+            case '/':
+                left /= primary();
+                t = get_token();
+                break;
+            case '%':
+                left %= primary();
+                t = get_token();
+                break;
+            default:
+            return left;
+        }
+    }
 }
