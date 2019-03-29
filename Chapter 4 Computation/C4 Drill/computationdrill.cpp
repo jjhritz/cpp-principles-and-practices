@@ -1,5 +1,6 @@
 //
 // Continually doubles then prints them, telling the user when the number entered is the largest or smallest it has seen.
+// Rejects non-supported units.
 // Terminates when a non-double is received.
 //
 // Yes, I'm aware "using namespace std" is bad practice; it's just how the header works
@@ -15,10 +16,12 @@ int main()
     double val;             // Holds the received double
     double minVal = 0, maxVal = 0;
     constexpr double cmPerM = 100, cmPerIn = 2.54, inPerF = 12;
-    string unit;              // Tracks the unit of the input for evaluation.
+
+    string unit;                // Tracks the unit of the input for evaluation.
 
     while(cin >> val >> unit)
     {
+        bool accepted = true;       // Flag that's set to false if the received unit is not recognized. Prevents evaluation.
         double valAsCm = 0;         // Stores the input value converted to centimeters
 
         cout << val << unit;
@@ -40,17 +43,29 @@ int main()
         {
             valAsCm = val * inPerF * cmPerIn;
         }
+        else
+        {
+            accepted = false;
+        }
 
-        if (valAsCm < minVal)
+        if(accepted)
         {
-            minVal = valAsCm;
-            cout << "This is the smallest number (" << valAsCm << "cm) received so far.";
+            if (valAsCm < minVal)
+            {
+                minVal = valAsCm;
+                cout << "This is the smallest number (" << valAsCm << "cm) received so far.";
+            }
+            else if (valAsCm > maxVal)
+            {
+                maxVal = valAsCm;
+                cout << "This is the largest number (" << valAsCm << "cm) received so far.";
+            }
         }
-        else if (valAsCm > maxVal)
+        else
         {
-            maxVal = valAsCm;
-            cout << "This is the largest number (" << valAsCm << "cm) received so far.";
+            cout << "Sorry, unit " << unit << " is not supported.";
         }
+
     }
 
     return 0;
