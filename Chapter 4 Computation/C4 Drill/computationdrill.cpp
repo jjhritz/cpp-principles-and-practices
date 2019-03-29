@@ -1,7 +1,6 @@
 //
-// Reads two doubles then prints them, telling the user which is bigger and which smaller, or if both are equal.
-// If the numbers differ by less than 0.01, the user is told they are "almost equal".
-// Terminates when a non-int is received.
+// Continually doubles then prints them, telling the user when the number entered is the largest or smallest it has seen.
+// Terminates when a non-double is received.
 //
 // Yes, I'm aware "using namespace std" is bad practice; it's just how the header works
 // I'm hoping Stroustrup will address this eventually.
@@ -13,28 +12,23 @@
 
 int main()
 {
-    double valA, valB;             // Holds the received doubles
+    double val;             // Holds the received double
+    double minVal = 0, maxVal = 0;
 
-    while(cin >> valA)
+    while(cin >> val)
     {
-        cin >> valB;
+        cout << val;
 
-        if (valA == valB)
+        if (val < minVal)
         {
-            cout << "You entered " << valA << " both times.";
+            minVal = val;
+            cout << "This is the smallest number received so far.";
         }
-        else
+        else if (val > maxVal)
         {
-            cout << "The smaller number is: " << min(valA, valB) << ".  The larger number is: " << max(valA, valB);
-
-            double diff = abs(valA - valB);
-
-            if(diff < 1.0/100)
-            {
-                cout << "These numbers are almost equal!";
-            }
+            maxVal = val;
+            cout << "This is the largest number received so far.";
         }
-
     }
 
     return 0;
