@@ -1,5 +1,6 @@
 //
-// Reads two ints then prints them.  Terminates when a non-int is received
+// Reads two doubles then prints them, telling the user which is bigger and which smaller, or if both are equal.
+// Terminates when a non-int is received.
 //
 // Yes, I'm aware "using namespace std" is bad practice; it's just how the header works
 // I'm hoping Stroustrup will address this eventually.
@@ -11,7 +12,7 @@
 
 int main()
 {
-    int valA, valB;             // Holds the received integers
+    double valA, valB;             // Holds the received doubles
 
     while(cin >> valA)
     {
