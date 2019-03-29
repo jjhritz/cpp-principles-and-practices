@@ -33,13 +33,21 @@ double expression()
     double left = term();               // Evaluate another term.  Calling Expression again results in infinite recursion.
     Token t = get_token();              // Get the next token
 
-    switch (t.kind)                     // Determine token type
+    while(true)
     {
-        case '+':                       // Addition operator
-            return left + term();       // Evaluate the next term and sum it with the left expression
-        case '-':                       // Subtraction operator
-            return left - term();       // Evaluate the next term and subtract it from the lest expression
-        default:                        // The next token isn't an addition or subtraction operator.
-            return left;
+        switch (t.kind)                     // Determine token type
+        {
+            case '+':                       // Addition operator
+                left += term();             // Evaluate the next term and sum it with the left expression
+                t = get_token();
+                break;
+            case '-':                       // Subtraction operator
+                left -= term();             // Evaluate the next term and subtract it from the lest expression
+                t = get_token();
+                break;
+            default:                        // The next token isn't an addition or subtraction operator.
+                return left;                // Return the answer.
+        }
     }
+
 }
