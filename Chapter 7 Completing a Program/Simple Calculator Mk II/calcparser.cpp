@@ -13,6 +13,7 @@
           Primary
           Term "*" Primary              // multiplication
           Term "/" Primary              // division
+          Term "%" Primary              // Floating-point modulo
     Primary:
           Number
            "(" Expression ")"           // grouping
@@ -72,6 +73,14 @@ double term(Token_stream *ts)
                 double d = primary(ts);
                 if (d == 0) error("Divide by zero");
                 left /= d;
+                t = ts->get();
+                break;
+            }
+            case '%':
+            {
+                double d = primary(ts);
+                if (d == 0) error("Divide by zero");
+                left = fmod(left, d);                   // Floating-point modulo function from <cmath>
                 t = ts->get();
                 break;
             }
