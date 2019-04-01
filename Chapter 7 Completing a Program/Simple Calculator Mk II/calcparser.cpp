@@ -7,15 +7,17 @@
  *
     Expression:
           Term
-          Expression "+" Term         // addition
-          Expression "–" Term         // subtraction
+          Expression "+" Term           // addition
+          Expression "–" Term           // subtraction
     Term:
           Primary
-          Term "*" Primary             // multiplication
-          Term "/" Primary             // division
+          Term "*" Primary              // multiplication
+          Term "/" Primary              // division
     Primary:
           Number
-           "(" Expression ")"          // grouping
+           "(" Expression ")"           // grouping
+           "-" Primary                  // unary negative
+           "+" Primary                  // unary positive
     Number:
           floating-point-literal
  */
@@ -98,6 +100,10 @@ double primary(Token_stream *ts)
         }
         case 'n':       // use 'n' to represent numbers because...well, what else can we use?
             return t.value;
+        case '-':
+            return -primary(ts);
+        case '+':
+            return primary(ts);
         default:
             error("Primary expected.  Check the grammar!");
     }
