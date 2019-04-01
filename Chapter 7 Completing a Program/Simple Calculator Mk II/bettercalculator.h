@@ -8,5 +8,6 @@
 #include "calcparser.h"
 
 void calculate();
+void clean_input(Token_stream* ts);
 
 #endif //PRINCIPLES_AND_PRACTICES_SIMPLECALCULATOR_H

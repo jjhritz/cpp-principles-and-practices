@@ -69,6 +69,7 @@ void calculate()
     Token_stream ts;        // provides get() and putback()
 
     while (cin)
+    try
     {
         cout << prompt;                       // Print prompt
 
@@ -82,5 +83,16 @@ void calculate()
         ts.putback(t);
         cout << result << expression(&ts) << '\n';
     }
+    catch (exception& e)
+    {
+        cerr << e.what() << '\n';
+        clean_input(&ts);
+    }
 
+}
+
+void clean_input(Token_stream* ts)
+{
+    // Dump the problematic expression
+    ts->ignore(ts->print);
 }

@@ -24,9 +24,10 @@ class Token_stream
         static constexpr char print = ';';     // A print command from the command line
         static constexpr char num = 'n';       // A numeric token (rather than an operator)
 
-        Token_stream();   // make a Token_stream that reads from cin
-        Token get();      // get a Token (get() is defined elsewhere)
-        void putback(Token t);    // put a Token back
+        Token_stream();             // make a Token_stream that reads from cin
+        Token get();                // get a Token (get() is defined elsewhere)
+        void putback(Token t);      // put a Token back
+        void ignore(char c);        // Discards all characters up to (and including) the first occurrence of c
 
     private:
         bool full;        // is there a Token in the buffer?

@@ -62,3 +62,23 @@ Token Token_stream::get()
             error("Bad token");
     }
 }
+
+
+void Token_stream::ignore(char c)
+{
+    // If the buffer is full, just allow it to be overwritten
+    if (full && c == buffer.kind)
+    {
+        full = false;
+        return;
+    }
+
+    // Otherwise, dump the buffer and everything else until we get to c
+    full = false;
+
+    char ch = 0;
+    while (cin >> ch)
+    {
+        if(ch == c) return;
+    }
+}
