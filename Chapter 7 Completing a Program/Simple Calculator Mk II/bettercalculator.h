@@ -7,5 +7,6 @@
 
 #include "calcparser.h"
 
+void calculate();
 
 #endif //PRINCIPLES_AND_PRACTICES_SIMPLECALCULATOR_H

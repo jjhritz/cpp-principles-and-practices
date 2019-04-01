@@ -5,6 +5,14 @@
 
 /* Grammar
  *
+    Statement:
+        Expression
+        Print
+        Quit
+    Print:
+        ;
+    Quit
+        q
     Expression:
           Term
           Expression "+" Term           // addition
