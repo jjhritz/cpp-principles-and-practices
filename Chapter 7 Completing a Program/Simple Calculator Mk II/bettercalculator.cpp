@@ -12,43 +12,39 @@
 
 int main()
 {
-    double val = 0;
     Token_stream ts;        // provides get() and putback()
 
     try
     {
         while (cin)
         {
-            cout << "> ";                   // Print prompt
+            cout << "> ";                       // Print prompt
 
             Token t = ts.get();
 
-            if(t.kind == 'q') break;        // 'q' for quit.  Always useful.
-
-            if(t.kind == ';')               // ';' for print now.  Allows evaluation to be printed immediately after expression is entered.
+            while(t.kind == ';') t = ts.get();  // Eat consecutive "print now" characters.
+            if(t.kind == 'q')                   // 'q' for quit.  Always useful.
             {
-                cout << "=" << val << '\n';
+                keep_window_open("~~");
+                return 0;
             }
-            else
-            {
-                ts.putback(t);
-            }
-
-            val = expression(&ts);
+            ts.putback(t);
+            cout << "=" << expression(&ts) << '\n';
         }
 
-        keep_window_open();
+        keep_window_open("~~");
+        return 0;
     }
     catch (exception& e)
     {
         cerr << e.what() << '\n';
-        keep_window_open();
+        keep_window_open("~~");
         return 1;
     }
     catch (...)
     {
         cerr << "exception \n";
-        keep_window_open();
+        keep_window_open("~~");
         return 2;
     }
 
